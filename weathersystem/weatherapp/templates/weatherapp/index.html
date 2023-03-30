@@ -7,10 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eagles Weather</title>
-    <meta name="author" content="name">
-    <meta name="description" content="name">
-    <meta name="keywords" content="name">
+    <meta name="author" content="Иво Иванов">
+    <meta name="description" content="Преглеждайте времето бързо и лесно с нашето ново и иновативно приложение EaglesDev Weather, в релано време за всички градове и села в света!">
+    <meta name="keywords" content="eagles, dev, eaglesdev, ivo, ivanov, weather, времето, иво, иванов, времето в българия, българия, градуси, влажност, новини">
     <link rel="stylesheet" href="{% static 'design.css' %}">
+    <link rel="icon" href="https://imgur.com/zil4AaA.png">
     <style>
         body {
             user-select: none;
@@ -208,11 +209,11 @@
         }
         .copyrights {
             margin: 0;
+            display: block;
             position: absolute;
-            top: 72%;
+            top: 75%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
+            transform: translate(-50%);
             font-size: 20px;
             font-family: 'Open Sans';
             font-weight: 700;
@@ -235,7 +236,7 @@
         </form>
         </div>
         <div class="weatherCard">
-            
+
             <div class="currentTemp">
                 <span class="temp">{{temp}} C&deg;</span>
                 <span class="location">{{name}}</span>
@@ -255,15 +256,15 @@
                 <!-- <p>{{day}}</p> -->
                 <p id="clock"></p>
             </div>
-            
+
     </div>
-    <p class="copyrights">2023 EaglesDev Studio Bulgaria. Всички права запазени.</p>
+    <p class="copyrights">&#169 2023 EaglesDev Studio Bulgaria. <br> Всички права запазени.</p>
     <!-- <h1>{{day}}</h1> -->
     <script>
         function getDateTime() {
-            let now     = new Date(); 
+            let now     = new Date();
             let year    = now.getFullYear();
-            let month   = now.getMonth()+1; 
+            let month   = now.getMonth()+1;
             let day     = now.getDate();
             let hour    = now.getHours();
             let minute  = now.getMinutes();
@@ -274,7 +275,7 @@
             }
             if(day.toString().length == 1) {
                 day = '0'+day;
-            }   
+            }
             if(hour.toString().length == 1) {
                 hour = '0'+hour;
             }
@@ -283,15 +284,15 @@
             }
             if(second.toString().length == 1) {
                 second = '0'+second;
-            }   
-            let dateTime = weekd+', '+day+'.'+month+'.'+year+ '    ' +hour+':'+minute+':'+second;   
+            }
+            let dateTime = weekd+', '+day+'.'+month+'.'+year+ '    ' +hour+':'+minute+':'+second;
             return dateTime;
         }
 
         setInterval(function(){
             currentTime = getDateTime();
             document.getElementById("clock").innerHTML = currentTime;
-        }, 100);   
+        }, 100);
     </script>
 </body>
 </html>
