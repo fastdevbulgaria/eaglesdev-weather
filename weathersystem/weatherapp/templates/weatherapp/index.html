@@ -1,0 +1,297 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eagles Weather</title>
+    <meta name="author" content="name">
+    <meta name="description" content="name">
+    <meta name="keywords" content="name">
+    <link rel="stylesheet" href="{% static 'design.css' %}">
+    <style>
+        body {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            background-image: radial-gradient(circle at 52% 94%, rgba(169, 169, 169,0.04) 0%, rgba(169, 169, 169,0.04) 50%,rgba(199, 199, 199,0.04) 50%, rgba(199, 199, 199,0.04) 100%),radial-gradient(circle at 96% 98%, rgba(61, 61, 61,0.04) 0%, rgba(61, 61, 61,0.04) 50%,rgba(201, 201, 201,0.04) 50%, rgba(201, 201, 201,0.04) 100%),radial-gradient(circle at 93% 97%, rgba(227, 227, 227,0.04) 0%, rgba(227, 227, 227,0.04) 50%,rgba(145, 145, 145,0.04) 50%, rgba(145, 145, 145,0.04) 100%),radial-gradient(circle at 79% 52%, rgba(245, 245, 245,0.04) 0%, rgba(245, 245, 245,0.04) 50%,rgba(86, 86, 86,0.04) 50%, rgba(86, 86, 86,0.04) 100%),linear-gradient(90deg, rgb(210, 9, 198),rgb(25, 38, 118));
+        }
+        .search {
+            padding-top: 2%;
+            padding-left: 3%;
+        }
+
+        .footer {
+            background-color: #4D4D4D;
+            margin-top: -8%;
+            width: 440px;
+            height: 54px;
+            color: #fff;
+            border-radius: 0px 0px 15px 15px;
+        }
+
+        .footer p {
+            text-align: center;
+            padding-top: 6px;
+            text-transform: uppercase;
+            font-family: 'Open Sans';
+	        font-weight: 700;
+	        font-size: 30px;
+        }
+
+        .form {
+            background-color: #4D4D4D;
+            width: 440px;
+            height: 54px;
+            margin-bottom: -1px;
+            border-radius: 15px 15px 0px 0px;
+        }
+
+        .input {
+            font-family: 'Open Sans';
+            font-weight: 700;
+            width: 305px;
+            height: 30px;
+            border-radius: 15px;
+            background-color: #0071bc;
+            color: #fff;
+        }
+
+        :-ms-input-placeholder {
+            color: #fff;
+        }
+
+        ::-ms-input-placeholder {
+            color: #fff;
+        }
+
+        ::placeholder {
+            color: #fff;
+        }
+
+        .button-1 {
+        background-color: #0071bc;
+        border-radius: 15px;
+        border-width: 0;
+        color: #fff;
+        cursor: pointer;
+        font-family: 'Open Sans';
+        font-size: 100%;
+        left: 5px;
+        height: 30px;
+        width: 90px;
+        line-height: 1.15;
+        position: relative;
+        text-align: center;
+        }
+
+        .button-1:hover {
+            background-color: #405cf5;
+        }
+
+        #weather_wrapper{
+            width: 440px;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .weatherCard{
+            width: 440px;
+            height: 200px;
+            font-family: 'Open Sans';
+            position: relative;
+        }
+        .currentTemp{
+            width: 220px;
+            height: 200px;
+            background: #4D4D4D;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .currentWeather{
+            width: 220px;
+            height: 200px;
+            background: #4D4D4D;
+            margin: 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .temp{
+            font-size: 70px;
+            text-align: center;
+            display: block;
+            font-weight: 300;
+            color: rgb(255, 255, 255);
+        }
+        .location{
+            color: rgb(255, 255, 255);
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 30px;
+            display: block;
+        }
+        .conditions{
+            display: block;
+            text-align: center;
+        }
+        .info{
+            width: 180px;
+            height: 50px;
+            position: absolute;
+            bottom: 0;
+            left: 9%;
+            background: #0071bc;
+            font-weight: 700;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        .info2{
+            width: 210px;
+            height: 30px;
+            background: #0071bc;
+            font-weight: 700;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            border-radius: 15px;
+            padding-top: 5px;
+        }
+
+        .rain {
+            width: 50%;
+            position: absolute;
+            left: 10px;
+            word-spacing: 60px;
+            top: 3px;
+        }
+        .rain::before{
+            display: block;
+            content: '\f02b';
+            font-family: weathericons;
+            font-size: 25px;
+            top: 5px;
+            position: absolute;
+        }
+        .wind {
+            width: 50%;
+            right: -10px;
+            position: absolute;
+            word-spacing: 60px;
+            top: 3px;
+        }
+        .wind::before{
+            display: block;
+            content: '\f050';
+            font-family: weathericons;
+            font-size: 25px;
+            left: -10px;
+            position: absolute;
+            top: 5px;
+        }
+        .logo {
+            width: 250px;
+            margin: 0;
+            position: absolute;
+            top: -35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        .copyrights {
+            margin: 0;
+            position: absolute;
+            top: 72%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            font-size: 20px;
+            font-family: 'Open Sans';
+            font-weight: 700;
+            background: -webkit-linear-gradient(left, #000000, #383838);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+
+
+      <div id="weather_wrapper">
+        <img src="https://imgur.com/QBLTrR5.png" alt="logo" class="logo">
+        <div class="form">
+        <form method="post" class="search">
+            {% csrf_token %}
+          <input type="text" name="city" placeholder="   Въведете град..." class="input">
+          <button type="submit" class="button-1">Търси</button>
+        </form>
+        </div>
+        <div class="weatherCard">
+            
+            <div class="currentTemp">
+                <span class="temp">{{temp}} C&deg;</span>
+                <span class="location">{{name}}</span>
+            </div>
+            <div class="currentWeather">
+                <div class="info2">
+                    <span class="description">{{description}}</span>
+                </div>
+                <span class="conditions"><img src="http://openweathermap.org/img/w/{{icon}}.png" alt="image" width="150px"></span>
+                <div class="info">
+                    <span class="rain">{{humidity}} %</span>
+                    <span class="wind">{{wind}} КМ/Ч</span>
+                </div>
+            </div>
+        </div>
+            <div class="footer">
+                <!-- <p>{{day}}</p> -->
+                <p id="clock"></p>
+            </div>
+            
+    </div>
+    <p class="copyrights">2023 EaglesDev Studio Bulgaria. Всички права запазени.</p>
+    <!-- <h1>{{day}}</h1> -->
+    <script>
+        function getDateTime() {
+            let now     = new Date(); 
+            let year    = now.getFullYear();
+            let month   = now.getMonth()+1; 
+            let day     = now.getDate();
+            let hour    = now.getHours();
+            let minute  = now.getMinutes();
+            let second  = now.getSeconds();
+            let weekd   = new Date().toLocaleString('bg-BG', {  weekday: 'short' });
+            if(month.toString().length == 1) {
+                month = '0'+month;
+            }
+            if(day.toString().length == 1) {
+                day = '0'+day;
+            }   
+            if(hour.toString().length == 1) {
+                hour = '0'+hour;
+            }
+            if(minute.toString().length == 1) {
+                minute = '0'+minute;
+            }
+            if(second.toString().length == 1) {
+                second = '0'+second;
+            }   
+            let dateTime = weekd+', '+day+'.'+month+'.'+year+ '    ' +hour+':'+minute+':'+second;   
+            return dateTime;
+        }
+
+        setInterval(function(){
+            currentTime = getDateTime();
+            document.getElementById("clock").innerHTML = currentTime;
+        }, 100);   
+    </script>
+</body>
+</html>
